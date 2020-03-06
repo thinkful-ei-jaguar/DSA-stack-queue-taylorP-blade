@@ -315,6 +315,39 @@ function squareDance(personQueue) {
   
 }
 
+const bank = (q) => {
+  let counter = 0;
+  while(q.first !== null){
+    if(Math.floor(Math.random()*4) === 1){
+      counter++
+      console.log(`${q.first.data} doesn't have their shit together.... thanks ${q.first.data}`)
+      q.enqueue(q.dequeue())
+    }
+    else {
+      console.log(`Good job ${q.first.data}, you have (some of) your shit together`)
+      q.dequeue()
+    }
+  }
+  console.log(`${counter} people had to be re-queued`)
+}
+
+function main4() {
+  const bankQ = new Queue();
+
+  bankQ.enqueue('Marcia')
+  bankQ.enqueue('Jan')
+  bankQ.enqueue('Bobby')
+  bankQ.enqueue('Greg')
+  bankQ.enqueue('Peter')
+  bankQ.enqueue('Carol')
+  bankQ.enqueue('Mike')
+  bankQ.enqueue('Cindy')
+
+  bank(bankQ)
+}
+
+main4();
+
 function main3() {
   const dancers = new Queue();
   dancers.enqueue('F Jane')
@@ -329,7 +362,7 @@ function main3() {
   squareDance(dancers)
 }
 
-main3();
+//main3();
 
 
 function main2() {
