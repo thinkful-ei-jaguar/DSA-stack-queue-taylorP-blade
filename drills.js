@@ -205,13 +205,28 @@ function main() {
   numberino.push(4);
   numberino.push(6111);
   numberino.push(83);
+  numberino.push(85);
+  numberino.push(84);
+  numberino.push(18);
+  numberino.push(83333333);
+  numberino.push(9837);
+  numberino.push(8008);
+  numberino.push(1111110101010);
+  numberino.push(9);
+  numberino.push('tomato');
+  numberino.push(7);
+  numberino.push(0);
+
 
 
 
   const sortedNumbers = sortStack(numberino);
   const sortedNumbers2 = sortStack(sortedNumbers);
   const sortedNumbers3 = sortStack(sortedNumbers2);
-  display(sortedNumbers3)
+  const sortedNumbers4 = sortStack(sortedNumbers3);
+  const sortedNumbers5 = sortStack(sortedNumbers4);
+  const sortedNumbers6 = sortStack(sortedNumbers5);
+  display(sortedNumbers6)
   
 }
 
