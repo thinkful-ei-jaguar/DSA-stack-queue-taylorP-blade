@@ -293,13 +293,48 @@ function main2() {
   // displayQ(starTreakQ);
   // isEmptyQ(starTreakQ);
 
-  const starTrek = new DoubleQueue();
-  starTrek.enqueue('kirk');
-  starTrek.enqueue('spock');
-  starTrek.enqueue('uhura');
-  starTrek.enqueue('sulu');
-  starTrek.enqueue('checkov');
-  displayQ(starTrek)
+  //const starTrek = new Queue();
+  const starStack1 = new Stack();
+  const starStack2 = new Stack();
+
+//enqueue initial stack -> c,sl,u,sp,k ----- enqueue fred in front of kirk ---- output --> c,sl,u,sp,k,f
+  // starStack1.push('kirk');
+  // starStack1.push('spock');
+  // starStack1.push('uhura');
+  // starStack1.push('sulu');
+  // starStack1.push('checkov');
+  // while(starStack1.top !== null){
+  //   starStack2.push(starStack1.pop());
+  // }
+  // starStack1.push('fred');
+  // while(starStack2.top !== null){
+  //   starStack1.push(starStack2.pop());
+  // }
+  // display(starStack1)
+
+  //dequeue initial stack -> c,sl,u,sp,k,f ----- dequeue fred ---- output --> c,sl,u,sp,k,
+  starStack1.push('fred');
+  starStack1.push('kirk');
+  starStack1.push('spock');
+  starStack1.push('uhura');
+  starStack1.push('sulu');
+  starStack1.push('checkov');
+  while(starStack1.top.next !== null){
+    starStack2.push(starStack1.pop());
+  }
+  starStack1.pop();
+  while(starStack2.top !== null){
+    starStack1.push(starStack2.pop());
+  }
+  display(starStack1)
+  
+
+  // starTrek.enqueue('kirk');
+  // starTrek.enqueue('spock');
+  // starTrek.enqueue('uhura');
+  // starTrek.enqueue('sulu');
+  // starTrek.enqueue('checkov');
+  // displayQ(starTrek)
 }
 
 main2();
