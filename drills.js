@@ -171,6 +171,69 @@ const sortStack = (firstStack) => {
 
 };
 
+class Queue {
+  constructor() {
+    this.first = null;
+    this.last = null;
+  }
+
+  enqueue(data) {
+    if(this.first === null){
+      const node = new _Node(data, null)
+      this.first = node
+      this.last = node
+      return node;
+    }
+    let temp = this.last
+    const node = new _Node(data, null)
+    temp.next = node
+    this.last = node
+    return node;
+  }
+
+  dequeue() {
+    if(this.first === null) {
+      return;
+    }
+    let temp = this.first
+    this.first = this.first.next
+    if(temp === this.last) {
+      this.last = null
+    }
+    return temp.data;
+  }
+}
+
+const displayQ = (Q) => {
+  
+  let QCopy = Q;
+  if (!QCopy.first) {
+    return;
+  }
+
+  if (QCopy.first.next === null) {
+    return console.log(`The first and only item is: ${QCopy.first.data}`);
+  }
+  while(QCopy.first.next !== null) {
+    console.log(`This item is: ${QCopy.first.data}`)
+    QCopy.first = QCopy.first.next;
+  }
+  console.log(`The last item is: ${QCopy.first.data}`);
+  
+};
+
+function main2() {
+  const starTreakQ = new Queue()
+
+  starTreakQ.enqueue('kirk')
+  starTreakQ.enqueue('spock')
+  starTreakQ.enqueue('uhura')
+  starTreakQ.enqueue('sulu')
+  starTreakQ.enqueue('checkov')
+  displayQ(starTreakQ)
+}
+
+main2();
 
 function main() {
   // const starTrek = new Stack();
@@ -230,4 +293,4 @@ function main() {
   
 }
 
-main();
+// main();
