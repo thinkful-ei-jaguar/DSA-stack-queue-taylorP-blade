@@ -5,6 +5,14 @@ class _Node {
   }
 }
 
+class _DoubleNode {
+  constructor(data, next, prev) {
+    this.data = data;
+    this.next = next;
+    this.prev = prev;
+  }
+}
+
 class Stack {
   constructor() {
     this.top = null;
@@ -49,7 +57,7 @@ const display = (stack) => {
     return console.log(`The first and only item is: ${stackCopy.top.data}`);
   }
   while(stackCopy.top.next !== null) {
-    console.log(`This item is: ${stackCopy.top.data}`)
+    console.log(`This item is: ${stackCopy.top.data}`);
     stackCopy.top = stackCopy.top.next;
   }
   console.log(`The 1st item is: ${stackCopy.top.data}`);
@@ -152,7 +160,7 @@ const sortStack = (firstStack) => {
       secondStack.push(firstStack.pop());
     }
   }
-  secondStack.push(temp)
+  secondStack.push(temp);
   let temp2 = secondStack.pop();
   while (!isEmpty(secondStack))
   {
@@ -165,7 +173,7 @@ const sortStack = (firstStack) => {
       firstStack.push(secondStack.pop());
     }
   }
-  firstStack.push(temp2)
+  firstStack.push(temp2);
 
   return firstStack;
 
@@ -179,15 +187,15 @@ class Queue {
 
   enqueue(data) {
     if(this.first === null){
-      const node = new _Node(data, null)
-      this.first = node
-      this.last = node
+      const node = new _Node(data, null);
+      this.first = node;
+      this.last = node;
       return node;
     }
-    let temp = this.last
-    const node = new _Node(data, null)
-    temp.next = node
-    this.last = node
+    let temp = this.last;
+    const node = new _Node(data, null);
+    temp.next = node;
+    this.last = node;
     return node;
   }
 
@@ -195,10 +203,10 @@ class Queue {
     if(this.first === null) {
       return;
     }
-    let temp = this.first
-    this.first = this.first.next
+    let temp = this.first;
+    this.first = this.first.next;
     if(temp === this.last) {
-      this.last = null
+      this.last = null;
     }
     return temp.data;
   }
@@ -215,29 +223,90 @@ const displayQ = (Q) => {
     return console.log(`The first and only item is: ${QCopy.first.data}`);
   }
   while(QCopy.first.next !== null) {
-    console.log(`This item is: ${QCopy.first.data}`)
+    console.log(`This item is: ${QCopy.first.data}`);
     QCopy.first = QCopy.first.next;
   }
   console.log(`The last item is: ${QCopy.first.data}`);
-  
+  QCopy.first = null
 };
 
-function main2() {
-  const starTreakQ = new Queue()
+const peekQ = (Q) => {
+  if (!Q.first) {
+    return;
+  }
+  return console.log(Q.first.data);
+};
 
-  starTreakQ.enqueue('kirk')
-  starTreakQ.enqueue('spock')
-  starTreakQ.enqueue('uhura')
-  starTreakQ.enqueue('sulu')
-  starTreakQ.enqueue('checkov')
-  displayQ(starTreakQ)
+const isEmptyQ = (Q) => {
+  return console.log(!Q.first);
+};
+
+
+class DoubleQueue {
+  constructor() {
+    this.first = null;
+    this.last = null;
+  }
+
+  enqueue(data) {
+    if(this.first === null){
+      const node = new _DoubleNode(data, null, null);
+      this.first = node;
+      this.last = node;
+      return node;
+    }
+    let temp = this.last;
+    const node = new _DoubleNode(data, null, temp);
+    temp.next = node;
+    this.last = node;
+    return node;
+  }
+
+  dequeue() {
+    if(this.first === null) {
+      return;
+    }
+    let temp = this.first;
+    this.first = this.first.next;
+    this.first.prev = null;
+    if(temp === this.last) {
+      this.last = null;
+    }
+    return temp.data;
+  }
+}
+
+function main2() {
+  // const starTreakQ = new Queue();
+
+  // isEmptyQ(starTreakQ);
+  // peekQ(starTreakQ);
+  // starTreakQ.enqueue('kirk');
+  // starTreakQ.enqueue('spock');
+  // starTreakQ.enqueue('uhura');
+  // starTreakQ.enqueue('sulu');
+  // starTreakQ.enqueue('checkov');
+  // displayQ(starTreakQ);
+  // peekQ(starTreakQ);
+  // starTreakQ.dequeue();
+  // peekQ(starTreakQ);
+  // displayQ(starTreakQ);
+  // isEmptyQ(starTreakQ);
+
+  const starTrek = new DoubleQueue();
+  starTrek.enqueue('kirk');
+  starTrek.enqueue('spock');
+  starTrek.enqueue('uhura');
+  starTrek.enqueue('sulu');
+  starTrek.enqueue('checkov');
+  displayQ(starTrek)
 }
 
 main2();
 
 function main() {
   // const starTrek = new Stack();
-  // starTrek.push('kirk');
+  // starTrek.push(krk');
   // starTrek.push('spock');
   // starTrek.push('mccoy');
   // starTrek.push('scotty');
@@ -289,7 +358,7 @@ function main() {
   const sortedNumbers4 = sortStack(sortedNumbers3);
   const sortedNumbers5 = sortStack(sortedNumbers4);
   const sortedNumbers6 = sortStack(sortedNumbers5);
-  display(sortedNumbers6)
+  display(sortedNumbers6);
   
 }
 
