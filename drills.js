@@ -29,9 +29,6 @@ class Stack {
   }
 }
 
-function print(list) {
-  console.log(list);
-}
 
 const peek = (stack) => {
   return stack.top;
@@ -44,11 +41,15 @@ const isEmpty = (stack) => {
 const display = (stack) => {
   
   let stackCopy = stack;
+  if (!stackCopy.top) {
+    return;
+  }
 
   if (stackCopy.top.next === null) {
     return console.log(`The first and only item is: ${stackCopy.top.data}`);
   }
   while(stackCopy.top.next !== null) {
+    console.log(`This item is: ${stackCopy.top.data}`)
     stackCopy.top = stackCopy.top.next;
   }
   console.log(`The 1st item is: ${stackCopy.top.data}`);
@@ -109,14 +110,21 @@ function is_palindrome(s) {
 
 const missingPar = (str) => {
   const stack = new Stack();
+  const parenStack = new Stack();
 
+  for (let i = 0; i< str.length; i++) {
+    if (str[i] === "(" && str[i] === ")" && str[i] === "[" && str[i] === "]" && str[i] === "{" && str[i] === "}")
+    {parenStack.push(str[i]);}
+  }
+  console.log('Take a peek:', display(parenStack));
   let counter = 0;
+
   for (let i=0; i<str.length; i++) {
     if(stack.push(str[i]).data === '('){
-      counter++
+      counter++;
     }
     if(stack.push(str[i]).data === ')'){
-      counter--
+      counter--;
     }
   }
   if(counter<0) {
@@ -126,7 +134,42 @@ const missingPar = (str) => {
     return `Missing ${Math.abs(counter)}')'`;
   }
   return 'Parenthesis all matched up';
-}
+};
+
+const sortStack = (firstStack) => {
+  
+  let secondStack = new Stack();
+  let temp = firstStack.pop();
+  
+  while (!isEmpty(firstStack))
+  {
+    if (peek(firstStack).data > temp) {
+
+      secondStack.push(temp);
+      temp = firstStack.pop();
+
+    } else {
+      secondStack.push(firstStack.pop());
+    }
+  }
+  secondStack.push(temp)
+  let temp2 = secondStack.pop();
+  while (!isEmpty(secondStack))
+  {
+    if (peek(secondStack).data < temp2) {
+
+      firstStack.push(temp2);
+      temp2 = secondStack.pop();
+
+    } else {
+      firstStack.push(secondStack.pop());
+    }
+  }
+  firstStack.push(temp2)
+
+  return firstStack;
+
+};
 
 
 function main() {
@@ -142,16 +185,33 @@ function main() {
   // console.log(starTrek.pop());
 
   // True, true, true, false
-  console.log(is_palindrome("dad"));
-  console.log(is_palindrome("A man, a plan, a canal: Panama"));
-  console.log(is_palindrome("1001"));
-  console.log(is_palindrome("Tauhida"));
+  // console.log(is_palindrome("dad"));
+  // console.log(is_palindrome("A man, a plan, a canal: Panama"));
+  // console.log(is_palindrome("1001"));
+  // console.log(is_palindrome("Tauhida"));
 
-  console.log(is_palindrome('fred'));
-  console.log(is_palindrome("racecar racecar"));
-  console.log(missingPar('x+(g-3)'))
-  console.log(missingPar('x+(g-3))))'))
-  console.log(missingPar('x+(g-3(((('))
+  // console.log(is_palindrome('fred'));
+  // console.log(is_palindrome("racecar racecar"));
+  // console.log(missingPar('x+(g-3)'));
+  // console.log(missingPar('x+(g-3))))'));
+  // console.log(missingPar('x+(g-3(((('));
+
+  const numberino = new Stack();
+  numberino.push(5);
+  numberino.push(3);
+  numberino.push(2);
+  numberino.push(6);
+  numberino.push(1);
+  numberino.push(4);
+  numberino.push(6111);
+  numberino.push(83);
+
+
+
+  const sortedNumbers = sortStack(numberino);
+  const sortedNumbers2 = sortStack(sortedNumbers);
+  const sortedNumbers3 = sortStack(sortedNumbers2);
+  display(sortedNumbers3)
   
 }
 
