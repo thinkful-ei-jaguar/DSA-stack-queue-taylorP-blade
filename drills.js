@@ -107,6 +107,26 @@ function is_palindrome(s) {
 
 }
 
+const missingPar = (str) => {
+  const stack = new Stack();
+
+  let counter = 0;
+  for (let i=0; i<str.length; i++) {
+    if(stack.push(str[i]).data === '('){
+      counter++
+    }
+    if(stack.push(str[i]).data === ')'){
+      counter--
+    }
+  }
+  if(counter<0) {
+    return `Missing ${Math.abs(counter)}'('`;
+  }
+  if(counter>0) {
+    return `Missing ${Math.abs(counter)}')'`;
+  }
+  return 'Parenthesis all matched up';
+}
 
 
 function main() {
@@ -129,7 +149,9 @@ function main() {
 
   console.log(is_palindrome('fred'));
   console.log(is_palindrome("racecar racecar"));
-  
+  console.log(missingPar('x+(g-3)'))
+  console.log(missingPar('x+(g-3))))'))
+  console.log(missingPar('x+(g-3(((('))
   
 }
 
