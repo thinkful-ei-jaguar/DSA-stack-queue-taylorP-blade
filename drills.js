@@ -55,26 +55,54 @@ const display = (stack) => {
   
 };
 
-function is_palindrome(s) {
-  const wordStack = new Stack();
-  let pushedArray = []
-  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-  let str = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-  // Your code goes here
-  for (let i = 0; i < str.length; i++) {
+// function is_palindrome(s) {
+//   const wordStack = new Stack();
+//   let pushedArray = []
+  
+//   s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+//   let str = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+//   // Your code goes here
+//   for (let i = 0; i < str.length; i++) {
 
-    pushedArray.push(wordStack.push(str[i]).data)
+//     pushedArray.push(wordStack.push(str[i]).data)
+    
+//     // console.log(pushedArray)
+//   }
+//   for (let i = 0; i < s.length; i++) {
+//     if(pushedArray[i] !== wordStack.pop()) {
+//       // console.log(pushedArray[i])
+//       return 'Not a palindrome'
+      
+//     }
+//   }
+//   return 'That is a palindrome'
+
+
+// }
+
+function is_palindrome(s) {
+
+  const wordStack = new Stack();
+  const secondStack = new Stack();
+  
+  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  
+  // Your code goes here
+  for (let i = 0; i < s.length; i++) {
+
+    wordStack.push(s[i]);
     
     // console.log(pushedArray)
   }
+
   for (let i = 0; i < s.length; i++) {
-    if(pushedArray[i] !== wordStack.pop()) {
+    if(secondStack.push(s[i]).data !== wordStack.pop()) {
       // console.log(pushedArray[i])
-      return 'Not a palindrome'
+      return 'Not a palindrome';
       
     }
   }
-  return 'That is a palindrome'
+  return 'That is a palindrome';
 
 
 }
@@ -99,8 +127,8 @@ function main() {
   console.log(is_palindrome("1001"));
   console.log(is_palindrome("Tauhida"));
 
-  console.log(is_palindrome('fred'))
-  console.log(is_palindrome("racecar racecar"))
+  console.log(is_palindrome('fred'));
+  console.log(is_palindrome("racecar racecar"));
   
   
 }
