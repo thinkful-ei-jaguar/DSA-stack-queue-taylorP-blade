@@ -227,7 +227,7 @@ const displayQ = (Q) => {
     QCopy.first = QCopy.first.next;
   }
   console.log(`The last item is: ${QCopy.first.data}`);
-  QCopy.first = null
+  QCopy.first = null;
 };
 
 const peekQ = (Q) => {
@@ -276,6 +276,62 @@ class DoubleQueue {
   }
 }
 
+
+function squareDance(personQueue) {
+  let sparesQueue = new Queue();
+  sparesQueue.enqueue(personQueue.dequeue());
+  let femaleDancer;
+  let maleDancer;
+
+  while (personQueue.first !== null) {
+    if (sparesQueue.first === null) {
+      sparesQueue.enqueue(personQueue.dequeue())
+    }
+    if (personQueue.first.data[0] === sparesQueue.first.data[0]) {
+      sparesQueue.enqueue(personQueue.dequeue());
+    } else {
+      if (sparesQueue.first.data[0] === "F") {
+        femaleDancer = sparesQueue.first.data;
+        maleDancer = personQueue.first.data;
+      } else {
+        femaleDancer = personQueue.first.data;
+        maleDancer = sparesQueue.first.data;
+      }
+      console.log(`Female dancer is ${femaleDancer.substring(2)}, and the male dancer is ${maleDancer.substring(2)}`)
+      sparesQueue.dequeue()
+      personQueue.dequeue()
+    }
+  }
+  
+  let genderCharacter = sparesQueue.first.data[0]  
+  let counter = 0;
+  while (sparesQueue.first !== null) {
+    sparesQueue.dequeue()
+    counter++
+  }
+  console.log(`There are ${counter} ${genderCharacter === "M" ? 'male' : 'female'} dancers waiting to dance`)
+  
+
+  
+}
+
+function main3() {
+  const dancers = new Queue();
+  dancers.enqueue('F Jane')
+  dancers.enqueue('M Frank')
+  dancers.enqueue('M John')
+  dancers.enqueue('M Sherlock')
+  dancers.enqueue('F Madonna')
+  dancers.enqueue('M David')
+  dancers.enqueue('M Christopher')
+  dancers.enqueue('F Beyonce')
+
+  squareDance(dancers)
+}
+
+main3();
+
+
 function main2() {
   // const starTreakQ = new Queue();
 
@@ -297,7 +353,7 @@ function main2() {
   const starStack1 = new Stack();
   const starStack2 = new Stack();
 
-//enqueue initial stack -> c,sl,u,sp,k ----- enqueue fred in front of kirk ---- output --> c,sl,u,sp,k,f
+  //enqueue initial stack -> c,sl,u,sp,k ----- enqueue fred in front of kirk ---- output --> c,sl,u,sp,k,f
   // starStack1.push('kirk');
   // starStack1.push('spock');
   // starStack1.push('uhura');
@@ -313,20 +369,20 @@ function main2() {
   // display(starStack1)
 
   //dequeue initial stack -> c,sl,u,sp,k,f ----- dequeue fred ---- output --> c,sl,u,sp,k,
-  starStack1.push('fred');
-  starStack1.push('kirk');
-  starStack1.push('spock');
-  starStack1.push('uhura');
-  starStack1.push('sulu');
-  starStack1.push('checkov');
-  while(starStack1.top.next !== null){
-    starStack2.push(starStack1.pop());
-  }
-  starStack1.pop();
-  while(starStack2.top !== null){
-    starStack1.push(starStack2.pop());
-  }
-  display(starStack1)
+  // starStack1.push('fred');
+  // starStack1.push('kirk');
+  // starStack1.push('spock');
+  // starStack1.push('uhura');
+  // starStack1.push('sulu');
+  // starStack1.push('checkov');
+  // while(starStack1.top.next !== null){
+  //   starStack2.push(starStack1.pop());
+  // }
+  // starStack1.pop();
+  // while(starStack2.top !== null){
+  //   starStack1.push(starStack2.pop());
+  // }
+  // display(starStack1)
   
 
   // starTrek.enqueue('kirk');
@@ -337,7 +393,7 @@ function main2() {
   // displayQ(starTrek)
 }
 
-main2();
+// main2();
 
 function main() {
   // const starTrek = new Stack();
@@ -398,3 +454,41 @@ function main() {
 }
 
 // main();
+
+
+
+
+// function squareDance(personQueue) {
+//   let sparesQueue = new Queue();
+//   let femaleDancer;
+//   let maleDancer;
+
+//   while (personQueue.first !== null) {
+
+//     let temp = personQueue.first;
+//     if (sparesQueue.isEmptyQ()) {
+//       if (temp.data[0] === temp.next.data[0]) {
+//         personQueue.dequeue();
+//         sparesQueue.enqueue(personQueue.dequeue());
+//       } else {
+//         if (temp.data[0] === "F") {
+//           femaleDancer = temp.data;
+//           maleDancer = temp.next.data;
+//         } else {
+//           femaleDancer = temp.next.data;
+//           maleDancer = temp.data;
+//         }
+
+//         personQueue.dequeue();
+//         personQueue.dequeue();
+//         return `Female dancer is ${femaleDancer.substring(2)}, and the male dancer is ${maleDancer.substring(2)}`;
+//       }
+//     } 
+//     else {
+//       if (temp.data[0] === sparesQueue[0]) {
+//         sparesQueue.enqueue(personQueue.dequeue())
+//       }
+//     }
+//   }
+
+// }
